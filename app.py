@@ -7,7 +7,7 @@ from tensorflow.keras.preprocessing.image import load_img, img_to_array  # Impor
 import os  # Import de la bibliothèque os pour manipuler les fichiers
 
 # Charger le modèle VGG19 pré-entraîné
-model = tf.keras.models.load_model(PATH)
+model = tf.keras.models.load_model(st.secrets["PATH"])
 
 # Définir les étiquettes de classe
 class_labels = ['Achraf Hakimi', 'Azzedine Ounahi', 'Hakim Ziyech', 'Nayef Aguerd', 'Noussair Mazraoui',
