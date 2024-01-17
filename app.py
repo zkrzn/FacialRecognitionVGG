@@ -7,7 +7,7 @@ from tensorflow.keras.preprocessing.image import load_img, img_to_array  # Impor
 import os  # Import de la bibliothèque os pour manipuler les fichiers
 
 # Charger le modèle VGG19 pré-entraîné
-@st.cache
+
 def load_model():
 
     save_dest = Path('model')
