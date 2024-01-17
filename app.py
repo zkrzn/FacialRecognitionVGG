@@ -5,23 +5,26 @@ import numpy as np  # Import de la bibliothèque NumPy pour manipuler les tablea
 from tensorflow.keras.applications.vgg19 import preprocess_input  # Import de la fonction de prétraitement de VGG19
 from tensorflow.keras.preprocessing.image import load_img, img_to_array  # Import de fonctions pour charger et convertir les images
 import os  # Import de la bibliothèque os pour manipuler les fichiers
+from GD_download import download_file_from_google_drive
 
 # Charger le modèle VGG19 pré-entraîné
 
+def download_file_from_url(url, destination):
+    response = requests.get(url)
+
+    with open(destination, "wb") as file:
+        file.write(response.content)
+
 def load_model():
+    model_path = "model.h5"  # Path to save the downloaded model file
+    model_url = "https://drive.google.com/file/d/1-CaE-ldpvO0mzdzswEUn74LR1sMIOFYV/view?usp=sharing"  # URL of the model file
 
-    save_dest = Path('model')
-    save_dest.mkdir(exist_ok=True)
-    
-    f_checkpoint = Path(st.secrets["PATH"])
+    if not os.path.exists(model_path):
+        with st.spinner("Downloading model..."):
+            download_file_from_url(model_url, model_path)
 
-    if not f_checkpoint.exists():
-        with st.spinner("Downloading model... this may take awhile! \n Don't stop it!"):
-            from GD_download import download_file_from_google_drive
-            download_file_from_google_drive(cloud_model_location, f_checkpoint)
-    
-    model = tf.keras.models.l.load(f_checkpoint, map_location=device)
-    #model.eval()
+    model = tf.keras.models.load_model(model_path)
+
     return model
     
 model = load_model()
