@@ -5,7 +5,7 @@ import numpy as np  # Import de la bibliothèque NumPy pour manipuler les tablea
 from tensorflow.keras.applications.vgg19 import preprocess_input  # Import de la fonction de prétraitement de VGG19
 from tensorflow.keras.preprocessing.image import load_img, img_to_array  # Import de fonctions pour charger et convertir les images
 import os  # Import de la bibliothèque os pour manipuler les fichiers
-
+import requests
 
 # Charger le modèle VGG19 pré-entraîné
 
