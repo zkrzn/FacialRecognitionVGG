@@ -17,7 +17,7 @@ def download_file_from_url(url, destination):
 
 def load_model():
     model_path = "model.h5"  # Path to save the downloaded model file
-    model_url = "https://www.dropbox.com/scl/fi/hyqdtu8gckz1l4483weps/VGG19_TeamMaroc.h5?rlkey=4cgeps6umtruvs79wwddej6vy&dl=1"  # URL of the model file
+    model_url = st.secrets['keras_path']  # URL of the model file
 
     if not os.path.exists(model_path):
         with st.spinner("Downloading model..."):
