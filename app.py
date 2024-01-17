@@ -7,7 +7,25 @@ from tensorflow.keras.preprocessing.image import load_img, img_to_array  # Impor
 import os  # Import de la bibliothèque os pour manipuler les fichiers
 
 # Charger le modèle VGG19 pré-entraîné
-model = tf.keras.models.load_model(st.secrets["PATH"])
+@st.cache
+def load_model():
+
+    save_dest = Path('model')
+    save_dest.mkdir(exist_ok=True)
+    
+    f_checkpoint = Path(st.secrets["PATH"])
+
+    if not f_checkpoint.exists():
+        with st.spinner("Downloading model... this may take awhile! \n Don't stop it!"):
+            from GD_download import download_file_from_google_drive
+            download_file_from_google_drive(cloud_model_location, f_checkpoint)
+    
+    model = tf.keras.models.l.load(f_checkpoint, map_location=device)
+    #model.eval()
+    return model
+    
+model = load_model()
+#model = tf.keras.models.load_model(st.secrets["PATH"])
 
 # Définir les étiquettes de classe
 class_labels = ['Achraf Hakimi', 'Azzedine Ounahi', 'Hakim Ziyech', 'Nayef Aguerd', 'Noussair Mazraoui',
